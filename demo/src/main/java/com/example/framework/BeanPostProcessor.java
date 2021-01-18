@@ -4,5 +4,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface BeanPostProcessor {
-   void autowired(Class classed, Object o);
+   void autowired(Class classed, Object o, AnnotationConfigApplicationContext annotationConfigApplicationContext);
 }

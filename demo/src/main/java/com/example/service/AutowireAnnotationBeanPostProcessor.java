@@ -11,17 +11,16 @@ import java.util.Map;
 
 @Component
 public class AutowireAnnotationBeanPostProcessor implements BeanPostProcessor {
-    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+
     @Override
-    public void autowired( Class beanClass, Object instance) {
-        //PublicFunction.checkAnnotationType(beanClass, instance);
+    public void autowired(Class beanClass, Object instance, AnnotationConfigApplicationContext annotationConfigApplicationContext) {
         for (Field field : beanClass.getDeclaredFields()) {
             if (field.isAnnotationPresent(Autowired.class)) {
                 // 满足条件 添加属性
                 // 给这个instance赋值  给他一个orderService值
                 // byType byName (@resource 就是byName)
                 //这里只写了byName
-                Object bean = applicationContext.getBean(field.getName());
+                Object bean = annotationConfigApplicationContext.getBean(field.getName());
                 field.setAccessible(true);
                 try {
                     field.set(instance, bean);
@@ -31,7 +30,6 @@ public class AutowireAnnotationBeanPostProcessor implements BeanPostProcessor {
             }
         }
         System.out.println("处理Autowired注解");
+
     }
-
-
 }

@@ -63,7 +63,7 @@ public class AnnotationConfigApplicationContext {
         try {
             Object instance = beanClass.getDeclaredConstructor().newInstance();
             for (BeanPostProcessor postProcessor : beanPostProcessorList) {
-                postProcessor.autowired(beanClass, instance);
+                postProcessor.autowired(beanClass, instance, this);
             }
             // 填充这个对象的属性  依赖注入
             //遍历当前类所以的字段属性
