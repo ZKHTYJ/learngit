@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MyBasticController {
     @Autowired
     private UserService userService;
+
     @RequestMapping("/addUser")
     public String addUser(String userName, Integer age) {
-        return userService.addUser(userName,age) ? "success" : "fail";
+        return userService.addUser(userName, age) ? "success" : "fail";
     }
 }

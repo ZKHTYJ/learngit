@@ -69,18 +69,18 @@ public class AnnotationConfigApplicationContext {
             //遍历当前类所以的字段属性
 
             //这是针对实现Autowired注解做的操作  移动到autowired方法(见上方代码) 先注释保留
-            for (Field field : beanClass.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Autowired.class)) {
-                    // 满足条件 添加属性
-                    // 给这个instance赋值  给他一个orderService值
-                    // byType byName (@resource 就是byName)
-                    //这里只写了byName
-                    String cc = field.getName();
-                    Object bean = getBean(cc);
-                    field.setAccessible(true);
-                    field.set(instance, bean);
-                }
-            }
+//            for (Field field : beanClass.getDeclaredFields()) {
+//                if (field.isAnnotationPresent(Autowired.class)) {
+//                    // 满足条件 添加属性
+//                    // 给这个instance赋值  给他一个orderService值
+//                    // byType byName (@resource 就是byName)
+//                    //这里只写了byName
+//                    String cc = field.getName();
+//                    Object bean = getBean(cc);
+//                    field.setAccessible(true);
+//                    field.set(instance, bean);
+//                }
+//            }
 
             // 判断这个类是否实现了BeanNameAware接口
             if (instance instanceof BeanNameAware) {

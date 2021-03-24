@@ -15,20 +15,20 @@ import javax.sql.DataSource;
 
 @Configuration
 // 扫包、引入模板
-@MapperScan(basePackages = "com.member", sqlSessionTemplateRef = "memberSqlSessionTemplate" )
+@MapperScan(basePackages = "com.member", sqlSessionTemplateRef = "memberSqlSessionTemplate")
 public class MemberDataSourceConfig {
     // @Configuration 相当于MemberDataSourceConfig.xml
     // 创建会员的dataSource
     @Bean(name = "memberDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.member")
-    public DataSource memberDataSource () {
+    public DataSource memberDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     // 创建会员的SqlSessionFactory
     @Bean("memberSqlSessionFactory")
     public SqlSessionFactory memberSqlSessionFactory(
-            @Qualifier("memberDataSource" )  DataSource dataSource) throws Exception {
+            @Qualifier("memberDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(memberDataSource());
         return sqlSessionFactoryBean.getObject();
@@ -36,14 +36,15 @@ public class MemberDataSourceConfig {
 
     // 创建会员事务管理器
     @Bean(name = "memberTransactionManager")
-    public DataSourceTransactionManager memberTransactionManager (
-            @Qualifier("memberDataSource" )  DataSource dataSource) throws Exception {
+    public DataSourceTransactionManager memberTransactionManager(
+            @Qualifier("memberDataSource") DataSource dataSource) throws Exception {
         return new DataSourceTransactionManager(dataSource);
 
     }
+
     //创建会员sqlSession模板
     @Bean("memberSqlSessionTemplate")
-    public SqlSessionTemplate memberSqlSessionTemplate (
+    public SqlSessionTemplate memberSqlSessionTemplate(
             @Qualifier("memberSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }

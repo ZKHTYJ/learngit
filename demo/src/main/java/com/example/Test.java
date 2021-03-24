@@ -7,8 +7,7 @@ import com.example.service.UserService;
 public class Test {
     public static void main(String[] args) {
         // 启动 扫描 创建bean （非懒加载的单例bean）
-        AnnotationConfigApplicationContext applicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext applicationContext =   new AnnotationConfigApplicationContext(AppConfig.class);
         UserService userService = (UserService) applicationContext.getBean("userService");
 
 //        Object userService = applicationContext.getBean("userService");

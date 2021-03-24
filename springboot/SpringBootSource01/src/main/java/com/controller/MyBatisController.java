@@ -6,6 +6,7 @@ import com.order.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 
 public class MyBatisController {
@@ -20,12 +21,14 @@ public class MyBatisController {
     private MemberMapper memberMapper;
     @Autowired
     private OrderMapper orderMapper;
+
     @RequestMapping("/addUserMember")
-    public String addUserMember(String name, Integer age){
-                return memberMapper.insert(name,age)>0 ? "success":"fail";
-            }
+    public String addUserMember(String name, Integer age) {
+        return memberMapper.insert(name, age) > 0 ? "success" : "fail";
+    }
+
     @RequestMapping("/addOrder")
-    public String addOrder(String name, Integer age){
-         return orderMapper.insertOrder(name,age)>0 ? "success":"fail";
+    public String addOrder(String name, Integer age) {
+        return orderMapper.insertOrder(name, age) > 0 ? "success" : "fail";
     }
 }

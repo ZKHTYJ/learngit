@@ -17,7 +17,7 @@ public class UserService {
     public boolean addUser(String userName, Integer age) {
         //int update = jdbcTemplate.update("insert into users values(null,?,?)",userName,age);
         int update = jdbcTemplate.update("insert into users values(null,?,?);", userName, age);
-        return update >0 ? true : false;
+        return update > 0 ? true : false;
     }
 
 

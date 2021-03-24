@@ -16,20 +16,20 @@ import javax.sql.DataSource;
 
 @Configuration
 // 扫包、引入模板
-@MapperScan(basePackages = "com.order", sqlSessionTemplateRef = "orderSqlSessionTemplate" )
+@MapperScan(basePackages = "com.order", sqlSessionTemplateRef = "orderSqlSessionTemplate")
 public class OrderDataSourceConfig {
     // @Configuration 相当于MemberDataSourceConfig.xml
     // 创建会员的dataSource
     @Bean(name = "orderDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.order")
-    public DataSource orderDataSource () {
+    public DataSource orderDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     // 创建订单的SqlSessionFactory
     @Bean("orderSqlSessionFactory")
     public SqlSessionFactory orderSqlSessionFactory(
-            @Qualifier("orderDataSource" )  DataSource dataSource) throws Exception {
+            @Qualifier("orderDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(orderDataSource());
         return sqlSessionFactoryBean.getObject();
@@ -37,15 +37,16 @@ public class OrderDataSourceConfig {
 
     // 创建会员事务管理器
     @Bean(name = "orderTransactionManager")
-    public DataSourceTransactionManager orderTransactionManager (
-            @Qualifier("orderDataSource" )  DataSource dataSource) throws Exception{
+    public DataSourceTransactionManager orderTransactionManager(
+            @Qualifier("orderDataSource") DataSource dataSource) throws Exception {
         return new DataSourceTransactionManager(dataSource);
 
     }
+
     //创建会员sqlSession模板
     @Bean("orderSqlSessionTemplate")
-    public SqlSessionTemplate orderSqlSessionTemplate (
-            @Qualifier("orderSqlSessionFactory") SqlSessionFactory sqlSessionFactory)  throws Exception{
+    public SqlSessionTemplate orderSqlSessionTemplate(
+            @Qualifier("orderSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
